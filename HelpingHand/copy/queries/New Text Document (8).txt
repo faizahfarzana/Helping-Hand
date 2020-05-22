@@ -1,0 +1,45 @@
+1.which zone affected with which disaster? 
+SELECT NAME,CATEGORY FROM disaster,affected_zone,zone WHERE
+ disaster.DISASTERID=affected_zone.DISASTERID AND zone.ZONEID=affected_zone.ZONEID
+
+2.kaar under a kon volunteer?
+
+ SELECT organizer.NAME,volunteeer.NAME FROM organizer,volunteeer WHERE 
+organizer.ORGANIZERID=volunteeer.ORGANIZERID
+
+3. kon food kon disaster a gese?
+
+SELECT T1.FOODRELEIFID,disaster.CATEGORY FROM 
+(SELECT food.FOODRELEIFID,relief.DISASTERID FROM food,relief WHERE food.RELIEFID=relief.RELIEFID )as T1,disaster WHERE 
+disaster.DISASTERID=T1.DISASTERID
+
+4. kon cloth kon disaster a gese?
+
+SELECT T1.CLOTHINGRELEIFID,T1.COST,disaster.CATEGORY FROM 
+(SELECT clothing.CLOTHINGRELEIFID,relief.DISASTERID,clothing.COST FROM clothing,relief WHERE clothing.CLOTHINGRELEIFID=relief.RELIEFID )
+as T1,disaster WHERE disaster.DISASTERID=T1.DISASTERID
+5.kon treatment kon disaster a gese?
+
+SELECT T1.TREATMENTRELEIFID,disaster.CATEGORY FROM 
+(SELECT treatment.TREATMENTRELEIFID,relief.DISASTERID FROM treatment,relief WHERE treatment.TREATMENTRELEIFID=relief.RELIEFID )
+as T1,disaster WHERE disaster.DISASTERID=T1.DISASTERID
+
+6.disaster by year?
+
+SELECT CATEGORY,DISASTER_DATE FROM `disaster` WHERE 1
+
+7.how many dis each year?
+
+SELECT COUNT(CATEGORY) as a,DISASTER_DATE FROM `disaster` WHERE 1 GROUP by YEAR(DISASTER_DATE)
+
+8.whole disaster info?
+
+SELECT DISASTERID,CATEGORY,DISASTER_DATE,KILLED_PEOPLE,AFFECTED_PEOPLE FROM `disaster` WHERE 1
+
+8.whole organizer data?
+
+SELECT ORGANIZERID,NAME,EMAIL,ADDRESS,JOIN_DATE,DESIGNATION FROM `organizer` WHERE 1
+
+9.whole relief info?
+
+SELECT RELIEFID,TOTALCOST,date,disaster.CATEGORY FROM relief,disaster WHERE relief.disasterid=disaster.DISASTERID
